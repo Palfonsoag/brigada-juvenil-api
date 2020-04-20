@@ -42,7 +42,7 @@ export class UserRepository extends Repository<User> {
     const query = this.createQueryBuilder("user");
 
     if (search) {
-      query.andWhere("(user.email LIKE :search)", { search: `%${search}%` });
+      query.where("(user.email LIKE :search)", { search: `%${search}%` });
     }
 
     const users = await query.getMany();
@@ -63,6 +63,7 @@ export class UserRepository extends Repository<User> {
   async signUp(signUpDto: SignUpDto): Promise<User> {
     const { email, password } = signUpDto;
     const salt = await bcrypt.genSalt();
+
     const user = new User();
 
     user.email = email;
