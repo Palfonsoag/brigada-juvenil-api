@@ -8,4 +8,4 @@ db:
 
 jwt:
   expiresIn: 3600
-  secret: "remesascelupagoSecret"
+  secret: "_Br1G4d4.JuV3n1L-s3Cr3T"
