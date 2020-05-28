@@ -4,10 +4,10 @@ export class CreateContactDto {
   @IsNotEmpty()
   name: string;
   @IsNotEmpty()
-  phone_number: string;
+  phoneNumber: string;
   @IsNotEmpty()
   address: string;
 
   @IsNotEmpty()
-  document_number: string;
+  documentNumber: string;
 }

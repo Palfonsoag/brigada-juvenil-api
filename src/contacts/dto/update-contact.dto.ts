@@ -5,10 +5,10 @@ export class UpdateContactDto {
   address: string;
 
   @IsOptional()
-  phone_number: string;
+  phoneNumber: string;
 
   @IsOptional()
-  document_number: string;
+  documentNumber: string;
 
   @IsOptional()
   name: string;

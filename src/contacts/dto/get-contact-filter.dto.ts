@@ -7,5 +7,5 @@ export class GetContactFilterDto {
 
   @IsOptional()
   @IsNotEmpty()
-  document_number: string;
+  documentNumber: string;
 }
