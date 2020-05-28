@@ -11,6 +11,7 @@ import { User } from "./user.entity";
 import { SignUpDto } from "./dto/sign-up.dto";
 import { SignInDto } from "./dto/sign-in.dto";
 import { JwtPayload } from "./jwt-payload.interface";
+import { UserRole } from "./user-role.enum";
 
 @Injectable()
 export class UsersService {
@@ -42,8 +43,8 @@ export class UsersService {
     }
   }
 
-  async signUp(signUpDto: SignUpDto): Promise<void> {
-    const user = await this.userRepository.signUp(signUpDto);
+  async signUp(signUpDto: SignUpDto, role: UserRole): Promise<void> {
+    const user = await this.userRepository.signUp(signUpDto, role);
 
     if (user) {
       const { email } = user;

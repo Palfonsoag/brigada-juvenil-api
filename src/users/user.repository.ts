@@ -8,6 +8,7 @@ import { User } from "./user.entity";
 import { GetUserFilterDto } from "./dto/get-user-filter.dto";
 import { SignUpDto } from "./dto/sign-up.dto";
 import { SignInDto } from "./dto/sign-in.dto";
+import { UserRole } from "./user-role.enum";
 
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
@@ -60,7 +61,7 @@ export class UserRepository extends Repository<User> {
     return user;
   }
 
-  async signUp(signUpDto: SignUpDto): Promise<User> {
+  async signUp(signUpDto: SignUpDto, role: UserRole): Promise<User> {
     const { email, password } = signUpDto;
     const salt = await bcrypt.genSalt();
 
@@ -69,9 +70,11 @@ export class UserRepository extends Repository<User> {
     user.email = email;
     user.password = await this.hashPassword(password, salt);
     user.salt = salt;
-
+    user.role = role;
     try {
       await user.save();
+      delete user.password;
+      delete user.salt;
       return user;
     } catch (error) {
       if (error.code === "23505") {

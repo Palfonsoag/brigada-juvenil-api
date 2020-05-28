@@ -16,6 +16,8 @@ import { GetUserFilterDto } from "./dto/get-user-filter.dto";
 import { User } from "./user.entity";
 import { SignUpDto } from "./dto/sign-up.dto";
 import { SignInDto } from "./dto/sign-in.dto";
+import { UserRoleValidationPipe } from "./pipes/user-role.pipe";
+import { UserRole } from "./user-role.enum";
 
 @Controller("users")
 export class UsersController {
@@ -40,8 +42,11 @@ export class UsersController {
 
   @Post("/signup")
   @UsePipes(ValidationPipe)
-  signUp(@Body(ValidationPipe) signUpDto: SignUpDto): Promise<void> {
-    return this.userService.signUp(signUpDto);
+  signUp(
+    @Body(ValidationPipe) signUpDto: SignUpDto,
+    @Body("role", UserRoleValidationPipe) role: UserRole
+  ): Promise<void> {
+    return this.userService.signUp(signUpDto, role);
   }
 
   @Post("/signin")
