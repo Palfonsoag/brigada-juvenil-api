@@ -39,11 +39,11 @@ export class CoursesController {
   }
 
   @Put("/:id/update")
-  updateRank(
+  updateCourse(
     @Param("id", ParseIntPipe) id: number,
     @Body(ValidationPipe) updateCourseDto: UpdateCourseDto
   ): Promise<Course> {
-    return this.coursesService.updateRank(id, updateCourseDto);
+    return this.coursesService.updateCourse(id, updateCourseDto);
   }
 
   @Post()

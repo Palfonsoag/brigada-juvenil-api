@@ -25,7 +25,7 @@ export class CoursesService {
     return foundCourse;
   }
 
-  async updateRank(
+  async updateCourse(
     id: number,
     updateCourseDto: UpdateCourseDto
   ): Promise<Course> {
