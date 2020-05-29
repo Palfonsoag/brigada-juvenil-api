@@ -6,7 +6,7 @@ import { UsersModule } from "./users/users.module";
 import { RanksModule } from "./ranks/ranks.module";
 import { SchoolsModule } from "./schools/schools.module";
 import { ContactsModule } from "./contacts/contacts.module";
-import { ClouthingModule } from "./clouthing/clouthing.module";
+import { ClothingModule } from "./clothing/clothing.module";
 import { ReligionModule } from "./religion/religion.module";
 import { CoursesModule } from "./courses/courses.module";
 import { AllergiesModule } from "./allergies/allergies.module";
@@ -20,7 +20,7 @@ import { SportsModule } from "./sports/sports.module";
     RanksModule,
     SchoolsModule,
     ContactsModule,
-    ClouthingModule,
+    ClothingModule,
     ReligionModule,
     CoursesModule,
     AllergiesModule,
