@@ -1,6 +1,6 @@
 import { IsOptional } from "class-validator";
 
-export class UpdateCourseDto {
+export class UpdateClothingDto {
   @IsOptional()
   name: string;
 }

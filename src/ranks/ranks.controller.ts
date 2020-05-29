@@ -22,24 +22,24 @@ export class RanksController {
   constructor(private ranksService: RanksService) {}
 
   @Get()
-  getStatuses(
+  getRanks(
     @Query(ValidationPipe) filterDto: GetRankFilterDto
   ): Promise<Rank[]> {
     return this.ranksService.getRanks(filterDto);
   }
 
   @Get("/:id")
-  getStatusById(@Param("id", ParseIntPipe) id: number): Promise<Rank> {
+  getRankById(@Param("id", ParseIntPipe) id: number): Promise<Rank> {
     return this.ranksService.getRankById(id);
   }
 
   @Delete("/:id")
-  deleteStatus(@Param("id", ParseIntPipe) id: number): Promise<void> {
+  deleteRank(@Param("id", ParseIntPipe) id: number): Promise<void> {
     return this.ranksService.deleteRank(id);
   }
 
   @Put("/:id/update")
-  updateStatus(
+  updateRank(
     @Param("id", ParseIntPipe) id: number,
     @Body(ValidationPipe) updateRankDto: UpdateRankDto
   ): Promise<Rank> {
