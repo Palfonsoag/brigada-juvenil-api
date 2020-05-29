@@ -25,15 +25,15 @@ export class RanksService {
     return foundRank;
   }
 
-  async updateRank(id: number, updateStatusDto: UpdateRankDto): Promise<Rank> {
+  async updateRank(id: number, updateRankDto: UpdateRankDto): Promise<Rank> {
     const rank = await this.getRankById(id);
 
-    if (updateStatusDto.description) {
-      rank.description = updateStatusDto.description;
+    if (updateRankDto.description) {
+      rank.description = updateRankDto.description;
     }
 
-    if (updateStatusDto.name) {
-      rank.name = updateStatusDto.name;
+    if (updateRankDto.name) {
+      rank.name = updateRankDto.name;
     }
 
     await rank.save();
@@ -49,7 +49,7 @@ export class RanksService {
     }
   }
 
-  async createStatus(createRankDto: CreateRankDto): Promise<void> {
+  async createRank(createRankDto: CreateRankDto): Promise<void> {
     await this.rankRepository.createRank(createRankDto);
   }
 }

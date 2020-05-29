@@ -9,12 +9,9 @@ import {
 
 @Entity()
 @Unique(["name"])
-export class Course extends BaseEntity {
+export class Sport extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
   @Column()
   name: string;
-
-  @Column()
-  description: string;
 }

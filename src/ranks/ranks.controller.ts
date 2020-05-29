@@ -48,9 +48,9 @@ export class RanksController {
 
   @Post()
   @UsePipes(ValidationPipe)
-  createStatus(
+  createRank(
     @Body(ValidationPipe) createRankDto: CreateRankDto
   ): Promise<void> {
-    return this.ranksService.createStatus(createRankDto);
+    return this.ranksService.createRank(createRankDto);
   }
 }
