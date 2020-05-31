@@ -6,6 +6,7 @@ import {
   Unique,
   ManyToOne,
   OneToOne,
+  JoinColumn,
 } from "typeorm";
 import * as bcrypt from "bcryptjs";
 import { UserRole } from "./user-role.enum";
@@ -33,6 +34,7 @@ export class User extends BaseEntity {
     (type) => Member,
     (member) => member.user
   )
+  @JoinColumn()
   member: Member;
 
   @Column()
