@@ -23,7 +23,7 @@ import { Clothing } from "src/clothing/clothing.entity";
 import { Allergy } from "src/allergies/allergy.entity";
 
 @Entity()
-@Unique(["document_number"])
+//@Unique(["document_number"])
 export class Member extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
@@ -31,7 +31,7 @@ export class Member extends BaseEntity {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ nullable: true })
   document_number: string;
 
   @Column({ type: "date" })
@@ -40,23 +40,14 @@ export class Member extends BaseEntity {
   @Column()
   gender: Gender;
 
-  @Column()
+  @Column({ nullable: true })
   blood_type: BloodType;
 
-  @Column()
+  @Column({ nullable: true })
   carnet: number;
 
-  @Column({ type: "date" })
+  @Column({ nullable: true, type: "date" })
   graduation_year: Date;
-
-  @OneToOne(
-    (type) => User,
-    (user) => user.member
-  )
-  user: User;
-
-  @Column()
-  userId: number;
 
   @ManyToOne(
     (type) => Rank,

@@ -12,32 +12,6 @@ import { UserRole } from "./user-role.enum";
 
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
-  /**LETS USE THIS METHOD AS AN EXAMPLE */
-  // async createUser(createUserDto: CreateUserDto): Promise<User> {
-  //   const {
-  //     name,
-  //     lastName,
-  //     email,
-  //     password,
-  //     document,
-  //     birthday,
-  //     gender
-  //   } = createUserDto;
-
-  //   const user = new User();
-
-  //   user.name = name;
-  //   user.last_name = lastName;
-  //   user.email = email;
-  //   user.password = password;
-  //   user.document = document;
-  //   user.birthday = birthday;
-  //   user.gender = gender;
-
-  //   await user.save();
-  //   return user;
-  // }
-
   async getUsers(filterDto: GetUserFilterDto): Promise<User[]> {
     const { search } = filterDto;
     const query = this.createQueryBuilder("user");

@@ -30,10 +30,7 @@ export class User extends BaseEntity {
   @Column()
   role: UserRole;
 
-  @OneToOne(
-    (type) => Member,
-    (member) => member.user
-  )
+  @OneToOne((type) => Member)
   @JoinColumn()
   member: Member;
 

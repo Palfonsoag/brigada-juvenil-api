@@ -18,11 +18,11 @@ export class ClothingService {
   }
 
   async getClothingById(id: number): Promise<Clothing> {
-    const foundSchool = await this.clothingRepository.findOne(id);
-    if (!foundSchool) {
+    const foundClothing = await this.clothingRepository.findOne(id);
+    if (!foundClothing) {
       throw new NotFoundException(`Los datos ingresados no coinciden`);
     }
-    return foundSchool;
+    return foundClothing;
   }
 
   async updateClothing(
