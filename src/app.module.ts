@@ -11,6 +11,10 @@ import { ReligionModule } from "./religion/religion.module";
 import { CoursesModule } from "./courses/courses.module";
 import { AllergiesModule } from "./allergies/allergies.module";
 import { SportsModule } from "./sports/sports.module";
+import { MembersContactModule } from './members-contact/members-contact.module';
+import { MembersCourseModule } from './members-course/members-course.module';
+import { MembersAllergyModule } from './members-allergy/members-allergy.module';
+import { MembersClothingModule } from './members-clothing/members-clothing.module';
 
 @Module({
   imports: [
@@ -25,6 +29,10 @@ import { SportsModule } from "./sports/sports.module";
     CoursesModule,
     AllergiesModule,
     SportsModule,
+    MembersContactModule,
+    MembersCourseModule,
+    MembersAllergyModule,
+    MembersClothingModule,
   ],
   controllers: [],
   providers: [],
