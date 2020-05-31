@@ -6,14 +6,16 @@ import {
   Unique,
   ManyToOne,
   OneToOne,
+  OneToMany,
 } from "typeorm";
 import { Gender } from "./member-gender.enum";
 import { BloodType } from "./member-blood-type.enum";
 import { User } from "../users/user.entity";
 import { Rank } from "../ranks/rank.entity";
-import { School } from "src/schools/school.entity";
-import { Religion } from "src/religion/religion.entity";
-import { Sport } from "src/sports/sport.entity";
+import { School } from "../schools/school.entity";
+import { Religion } from "../religion/religion.entity";
+import { Sport } from "../sports/sport.entity";
+import { MembersContact } from "../members-contact/members-contact.entity";
 
 @Entity()
 @Unique(["document_number"])
@@ -90,4 +92,10 @@ export class Member extends BaseEntity {
 
   @Column()
   sportId: number;
+
+  @OneToMany(
+    (type) => MembersContact,
+    (membersContact) => membersContact.member
+  )
+  contacts: MembersContact[];
 }
