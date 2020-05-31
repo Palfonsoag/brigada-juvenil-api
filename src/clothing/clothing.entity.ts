@@ -5,7 +5,9 @@ import {
   Column,
   Unique,
   OneToMany,
+  ManyToMany,
 } from "typeorm";
+import { Member } from "../members/member.entity";
 
 @Entity()
 @Unique(["name"])
@@ -14,4 +16,10 @@ export class Clothing extends BaseEntity {
   id: number;
   @Column()
   name: string;
+
+  @ManyToMany(
+    (type) => Member,
+    (member) => member.clothing
+  )
+  members: Member[];
 }

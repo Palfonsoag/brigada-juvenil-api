@@ -7,6 +7,8 @@ import {
   ManyToOne,
   OneToOne,
   OneToMany,
+  JoinTable,
+  ManyToMany,
 } from "typeorm";
 import { Gender } from "./member-gender.enum";
 import { BloodType } from "./member-blood-type.enum";
@@ -16,6 +18,9 @@ import { School } from "../schools/school.entity";
 import { Religion } from "../religion/religion.entity";
 import { Sport } from "../sports/sport.entity";
 import { MembersContact } from "../members-contact/members-contact.entity";
+import { Course } from "src/courses/course.entity";
+import { Clothing } from "src/clothing/clothing.entity";
+import { Allergy } from "src/allergies/allergy.entity";
 
 @Entity()
 @Unique(["document_number"])
@@ -98,4 +103,25 @@ export class Member extends BaseEntity {
     (membersContact) => membersContact.member
   )
   contacts: MembersContact[];
+
+  @ManyToMany(
+    (type) => Course,
+    (course) => course.members
+  )
+  @JoinTable()
+  courses: Course[];
+
+  @ManyToMany(
+    (type) => Clothing,
+    (clothing) => clothing.members
+  )
+  @JoinTable()
+  clothing: Clothing[];
+
+  @ManyToMany(
+    (type) => Allergy,
+    (allergy) => allergy.members
+  )
+  @JoinTable()
+  allergies: Allergy[];
 }
