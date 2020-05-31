@@ -6,6 +6,7 @@ import {
   Unique,
   OneToMany,
 } from "typeorm";
+import { Member } from "../members/member.entity";
 
 @Entity()
 @Unique(["name"])
@@ -17,4 +18,10 @@ export class Rank extends BaseEntity {
 
   @Column()
   description: string;
+
+  @OneToMany(
+    (type) => Member,
+    (member) => member.rank
+  )
+  members: Member[];
 }
