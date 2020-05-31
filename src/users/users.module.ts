@@ -7,6 +7,7 @@ import { UsersService } from "./users.service";
 import { UserRepository } from "./user.repository";
 import * as config from "config";
 import { JwtStrategy } from "./jwt-strategy";
+import { MembersModule } from "../members/members.module";
 
 const jwtConfig = config.get("jwt");
 @Module({
@@ -19,6 +20,7 @@ const jwtConfig = config.get("jwt");
       },
     }),
     TypeOrmModule.forFeature([UserRepository]),
+    MembersModule,
   ],
   controllers: [UsersController],
   providers: [UsersService, JwtStrategy],

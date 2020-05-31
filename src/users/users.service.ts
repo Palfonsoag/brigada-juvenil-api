@@ -12,13 +12,15 @@ import { SignUpDto } from "./dto/sign-up.dto";
 import { SignInDto } from "./dto/sign-in.dto";
 import { JwtPayload } from "./jwt-payload.interface";
 import { UserRole } from "./user-role.enum";
+import { MembersService } from "../members/members.service";
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(UserRepository)
     private userRepository: UserRepository,
-    private jwtService: JwtService
+    private jwtService: JwtService,
+    private memberService: MembersService
   ) {}
   async getUsers(filterDto: GetUserFilterDto): Promise<User[]> {
     return this.userRepository.getUsers(filterDto);
@@ -43,14 +45,14 @@ export class UsersService {
     }
   }
 
-  async signUp(signUpDto: SignUpDto, role: UserRole): Promise<void> {
-    const user = await this.userRepository.signUp(signUpDto, role);
+  async signUp(
+    signUpDto: SignUpDto,
+    role: UserRole,
+    memberId: number
+  ): Promise<void> {
+    const member = await this.memberService.getMemberById(memberId);
 
-    if (user) {
-      const { email } = user;
-      const subject = "¡Bienvenido a Celupagos! - Confirma tu correo";
-      const text = "Confirma tu  correo";
-    }
+    const user = await this.userRepository.signUp(signUpDto, role, member);
   }
 
   async signIn(signInDto: SignInDto): Promise<{ accessToken: string }> {

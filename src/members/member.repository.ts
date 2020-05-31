@@ -74,6 +74,7 @@ export class MemberRepository extends Repository<Member> {
 
       return member;
     } catch (error) {
+      console.log(error);
       if (error.code === "23505") {
         throw new ConflictException("El correo ya se encuentra registrado");
       } else {

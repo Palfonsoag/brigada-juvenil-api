@@ -52,42 +52,42 @@ export class Member extends BaseEntity {
   @ManyToOne(
     (type) => Rank,
     (rank) => rank.members,
-    { eager: true }
+    { nullable: true }
   )
   rank: Rank;
 
-  @Column()
-  rankId: number;
+  // @Column()
+  // rankId: number;
 
   @ManyToOne(
     (type) => School,
     (school) => school.members,
-    { eager: true }
+    { nullable: true }
   )
   school: School;
 
-  @Column()
-  schoolId: number;
+  // @Column()
+  // schoolId: number;
 
   @ManyToOne(
     (type) => Religion,
     (religion) => religion.members,
-    { eager: true }
+    { nullable: true }
   )
   religion: Religion;
 
-  @Column()
-  religionId: number;
+  // @Column()
+  // religionId: number;
 
   @ManyToOne(
     (type) => Sport,
     (sport) => sport.members,
-    { eager: true }
+    { nullable: true }
   )
   sport: Sport;
 
-  @Column()
-  sportId: number;
+  // @Column()
+  // sportId: number;
 
   @OneToMany(
     (type) => MembersContact,

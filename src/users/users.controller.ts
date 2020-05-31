@@ -33,20 +33,14 @@ export class UsersController {
     return this.userService.getUserById(id);
   }
 
-  /**LETS USE THIS METHOD AS AN EXAMPLE */
-  // @Post()
-  // @UsePipes(ValidationPipe)
-  // createUSer(@Body() createUserDto: CreateUserDto): Promise<User> {
-  //   return this.userService.createUser(createUserDto);
-  // }
-
   @Post("/signup")
   @UsePipes(ValidationPipe)
   signUp(
     @Body(ValidationPipe) signUpDto: SignUpDto,
-    @Body("role", UserRoleValidationPipe) role: UserRole
+    @Body("role", UserRoleValidationPipe) role: UserRole,
+    @Body("member") member: number
   ): Promise<void> {
-    return this.userService.signUp(signUpDto, role);
+    return this.userService.signUp(signUpDto, role, member);
   }
 
   @Post("/signin")

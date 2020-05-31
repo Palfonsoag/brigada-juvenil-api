@@ -33,6 +33,7 @@ export class MembersService {
   }
 
   async createMember(createMemberDto: CreateMemberDto): Promise<void> {
+    console.log("bbbbbbbbbbbbbbbbbb");
     await this.memberRepository.createMember(createMemberDto);
   }
 }
