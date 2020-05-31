@@ -9,5 +9,6 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 
   providers: [ReligionService],
   controllers: [ReligionController],
+  exports: [ReligionService],
 })
 export class ReligionModule {}

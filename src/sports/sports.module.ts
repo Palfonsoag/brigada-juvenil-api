@@ -9,5 +9,6 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 
   providers: [SportsService],
   controllers: [SportsController],
+  exports: [SportsService],
 })
 export class SportsModule {}

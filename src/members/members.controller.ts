@@ -9,11 +9,14 @@ import {
   Param,
   ParseIntPipe,
   Query,
+  Put,
 } from "@nestjs/common";
 import { MembersService } from "./members.service";
 import { GetMemberFilterDto } from "./dto/get-members.dto";
 import { Member } from "./member.entity";
 import { CreateMemberDto } from "./dto/create-members.dto";
+import { UpdateMemberDto } from "./dto/update-member.dto";
+import { UpdateSecondaryDataDto } from "./dto/update-secondary-data.dto";
 
 @Controller("members")
 export class MembersController {
@@ -36,8 +39,23 @@ export class MembersController {
   createMember(
     @Body(ValidationPipe) createMemberDto: CreateMemberDto
   ): Promise<void> {
-    console.log("aaaaaaaaaaaaa");
     return this.membersService.createMember(createMemberDto);
+  }
+
+  @Put("/:id/update")
+  updateMember(
+    @Param("id", ParseIntPipe) id: number,
+    @Body(ValidationPipe) updateMemberDto: UpdateMemberDto
+  ): Promise<Member> {
+    return this.membersService.updateMember(id, updateMemberDto);
+  }
+
+  @Put("/:id/second-data")
+  updateSecondData(
+    @Param("id", ParseIntPipe) id: number,
+    @Body(ValidationPipe) updateSecondaryDataDto: UpdateSecondaryDataDto
+  ): Promise<Member> {
+    return this.membersService.updateSecondData(id, updateSecondaryDataDto);
   }
 
   @Delete("/:id")

@@ -8,5 +8,6 @@ import { RankRepository } from "./rank.repository";
   imports: [TypeOrmModule.forFeature([RankRepository])],
   controllers: [RanksController],
   providers: [RanksService],
+  exports: [RanksService],
 })
 export class RanksModule {}
