@@ -36,6 +36,62 @@ export class MemberRepository extends Repository<Member> {
     return members;
   }
 
+  async getMember(id: number) {
+    const query = this.createQueryBuilder("member")
+      .leftJoinAndSelect("member.clothing", "clothing")
+      .leftJoinAndSelect("member.allergies", "allergy")
+      .leftJoinAndSelect("member.courses", "course");
+
+    query.where("member.id = :id", {
+      id,
+    });
+    const clothes = await query.getOne();
+
+    return clothes;
+  }
+
+  async getClothes(id: number) {
+    const query = this.createQueryBuilder("member").leftJoinAndSelect(
+      "member.clothing",
+      "clothing"
+    );
+
+    query.where("member.id = :id", {
+      id,
+    });
+    const clothes = await query.getOne();
+
+    return clothes;
+  }
+
+  async getAllergy(id: number) {
+    const query = this.createQueryBuilder("member").leftJoinAndSelect(
+      "member.allergies",
+      "allergy"
+    );
+
+    query.where("member.id = :id", {
+      id,
+    });
+    const allergies = await query.getOne();
+
+    return allergies;
+  }
+
+  async getCourses(id: number) {
+    const query = this.createQueryBuilder("member").leftJoinAndSelect(
+      "member.courses",
+      "course"
+    );
+
+    query.where("member.id = :id", {
+      id,
+    });
+    const courses = await query.getOne();
+
+    return courses;
+  }
+
   async createMember(createMemberDto: CreateMemberDto): Promise<Member> {
     const {
       name,

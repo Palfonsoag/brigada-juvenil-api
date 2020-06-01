@@ -10,6 +10,9 @@ import { RanksService } from "../ranks/ranks.service";
 import { SchoolsService } from "../schools/schools.service";
 import { SportsService } from "../sports/sports.service";
 import { ReligionService } from "../religion/religion.service";
+import { ClothingService } from "../clothing/clothing.service";
+import { AllergiesService } from "../allergies/allergies.service";
+import { CoursesService } from "../courses/courses.service";
 
 @Injectable()
 export class MembersService {
@@ -19,11 +22,18 @@ export class MembersService {
     private rankService: RanksService,
     private schoolService: SchoolsService,
     private sportService: SportsService,
-    private religionService: ReligionService
+    private religionService: ReligionService,
+    private clothingService: ClothingService,
+    private allergiesService: AllergiesService,
+    private coursesService: CoursesService
   ) {}
 
   async getMembers(filterDto: GetMemberFilterDto): Promise<Member[]> {
     return this.memberRepository.getMembers(filterDto);
+  }
+
+  async getMember(id: number): Promise<Member> {
+    return this.memberRepository.getMember(id);
   }
 
   async getMemberById(id: number): Promise<Member> {
@@ -117,6 +127,57 @@ export class MembersService {
       member.sport = sport;
     }
 
+    await member.save();
+
+    return member;
+  }
+
+  async updateClothing(id: number, clothingId: number): Promise<Member> {
+    const member = await this.getMemberById(id);
+    const clothing = await this.clothingService.getClothingById(clothingId);
+
+    const memberCloth = await this.memberRepository.getClothes(member.id);
+    const clothingArray = memberCloth.clothing;
+
+    if (clothingArray) {
+      member.clothing = [...clothingArray, clothing];
+    } else {
+      member.clothing = [clothing];
+    }
+    await member.save();
+
+    return member;
+  }
+
+  async updateCourses(id: number, courseId: number): Promise<Member> {
+    const member = await this.getMemberById(id);
+    const course = await this.coursesService.getCourseById(courseId);
+
+    const memberCourses = await this.memberRepository.getCourses(member.id);
+    const coursesArray = memberCourses.courses;
+
+    if (coursesArray) {
+      member.courses = [...coursesArray, course];
+    } else {
+      member.courses = [course];
+    }
+    await member.save();
+
+    return member;
+  }
+
+  async updateAllergy(id: number, allergyId: number): Promise<Member> {
+    const member = await this.getMemberById(id);
+    const allergy = await this.allergiesService.getAllergyById(allergyId);
+
+    const memberAllergies = await this.memberRepository.getAllergy(member.id);
+    const allergiesArray = memberAllergies.allergies;
+
+    if (allergiesArray) {
+      member.allergies = [...allergiesArray, allergy];
+    } else {
+      member.allergies = [allergy];
+    }
     await member.save();
 
     return member;

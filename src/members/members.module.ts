@@ -7,6 +7,9 @@ import { RanksModule } from "../ranks/ranks.module";
 import { SportsModule } from "../sports/sports.module";
 import { ReligionModule } from "../religion/religion.module";
 import { SchoolsModule } from "../schools/schools.module";
+import { ClothingModule } from "../clothing/clothing.module";
+import { AllergiesModule } from "../allergies/allergies.module";
+import { CoursesModule } from "../courses/courses.module";
 
 @Module({
   imports: [
@@ -15,6 +18,9 @@ import { SchoolsModule } from "../schools/schools.module";
     SportsModule,
     ReligionModule,
     SchoolsModule,
+    ClothingModule,
+    AllergiesModule,
+    CoursesModule,
   ],
   controllers: [MembersController],
   providers: [MembersService],

@@ -34,6 +34,11 @@ export class MembersController {
     return this.membersService.getMemberById(id);
   }
 
+  @Get("/:id/full-data")
+  getMember(@Param("id", ParseIntPipe) id: number): Promise<Member> {
+    return this.membersService.getMember(id);
+  }
+
   @Post("/create")
   @UsePipes(ValidationPipe)
   createMember(
@@ -56,6 +61,29 @@ export class MembersController {
     @Body(ValidationPipe) updateSecondaryDataDto: UpdateSecondaryDataDto
   ): Promise<Member> {
     return this.membersService.updateSecondData(id, updateSecondaryDataDto);
+  }
+  @Put("/:id/update-clothing")
+  updateClothing(
+    @Param("id", ParseIntPipe) id: number,
+    @Body("clothing") clothing: number
+  ): Promise<Member> {
+    return this.membersService.updateClothing(id, clothing);
+  }
+
+  @Put("/:id/update-course")
+  updateCourses(
+    @Param("id", ParseIntPipe) id: number,
+    @Body("course") course: number
+  ): Promise<Member> {
+    return this.membersService.updateCourses(id, course);
+  }
+
+  @Put("/:id/update-allergy")
+  updateAllergy(
+    @Param("id", ParseIntPipe) id: number,
+    @Body("allergy") allergy: number
+  ): Promise<Member> {
+    return this.membersService.updateAllergy(id, allergy);
   }
 
   @Delete("/:id")
