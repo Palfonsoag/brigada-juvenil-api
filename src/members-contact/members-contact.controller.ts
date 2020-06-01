@@ -33,7 +33,7 @@ export class MembersContactController {
   @Post()
   @UsePipes(ValidationPipe)
   createMembersContact(
-    @Body("emergency") emergency: boolean,
+    @Body("emergency") emergency: string,
     @Body("member") member: number,
     @Body("contact") contact: number
   ): Promise<void> {

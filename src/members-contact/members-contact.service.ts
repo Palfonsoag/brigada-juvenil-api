@@ -28,7 +28,7 @@ export class MembersContactService {
   }
 
   async createMembersContact(
-    emergency: boolean,
+    emergency: string,
     memberId: number,
     contactId: number
   ): Promise<void> {

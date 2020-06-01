@@ -39,13 +39,14 @@ export class MembersContactRepository extends Repository<MembersContact> {
   }
 
   async createMembersContact(
-    emergency: boolean,
+    emergency: string,
     member: Member,
     contact: Contact
   ): Promise<MembersContact> {
     const membersContact = new MembersContact();
 
-    membersContact.emergency = emergency;
+    const value = emergency === "true";
+    membersContact.emergency = value;
     membersContact.member = member;
 
     membersContact.contact = contact;
