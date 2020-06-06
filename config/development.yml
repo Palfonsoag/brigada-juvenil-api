@@ -1,5 +1,6 @@
 db:
   host: "localhost"
-  username: "pedrogarcia"
-  password: "pedrogarcia"
-  synchronize: true
+  username: "acamba"
+  password: "5530321"
+  synchronize: false
+  drop: false

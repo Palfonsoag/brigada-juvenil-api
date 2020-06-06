@@ -21,6 +21,7 @@ import { CreateReligionDto } from "./dto/create-religion.dto";
 export class ReligionController {
   constructor(private religionService: ReligionService) {}
 
+  @Get()
   getReligions(
     @Query(ValidationPipe) filterDto: GetReligionFilterDto
   ): Promise<Religion[]> {

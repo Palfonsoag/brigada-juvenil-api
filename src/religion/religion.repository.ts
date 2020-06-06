@@ -21,7 +21,7 @@ export class ReligionRepository extends Repository<Religion> {
         name: `%${name}%`,
       });
     }
-
+    
     const religion = await query.getMany();
 
     return religion;

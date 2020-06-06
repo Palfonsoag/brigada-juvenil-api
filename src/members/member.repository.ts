@@ -1,4 +1,4 @@
-import { Repository, EntityRepository } from "typeorm";
+import { Repository, EntityRepository, Like } from "typeorm";
 import {
   ConflictException,
   InternalServerErrorException,
@@ -15,25 +15,21 @@ import { Sport } from "src/sports/sport.entity";
 @EntityRepository(Member)
 export class MemberRepository extends Repository<Member> {
   async getMembers(filterDto: GetMemberFilterDto): Promise<Member[]> {
-    const { search, name, document_number } = filterDto;
-    const query = this.createQueryBuilder("member");
+    let { search, name, document_number } = filterDto;
 
-    if (name) {
-      query.andWhere("(member.name LIKE :name)", { name: `%${name}%` });
-    }
-    if (document_number) {
-      query.andWhere("(member.document_number LIKE :document_number)", {
-        document_number: `%${document_number}%`,
-      });
-    }
+    name = name || '';
+    document_number = document_number || '';
+    search = search || '';
 
-    if (search) {
-      query.andWhere("(member.email LIKE :search)", { search: `%${search}%` });
-    }
-
-    const members = await query.getMany();
-
-    return members;
+    return await this.find({
+      relations: ['school', 'rank', 'religion', 'sport'],
+      where: {
+        name: Like(`%${name}%`),
+        document_number: Like(`%${document_number}%`),
+        email: Like(`%${search}%`)
+      },
+      
+    })
   }
 
   async getMember(id: number) {
