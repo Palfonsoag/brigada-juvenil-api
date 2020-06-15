@@ -22,28 +22,28 @@ export class MemberRepository extends Repository<Member> {
     search = search || '';
 
     return await this.find({
-      relations: ['school', 'rank', 'religion', 'sport'],
       where: {
         name: Like(`%${name}%`),
         document_number: Like(`%${document_number}%`),
         email: Like(`%${search}%`)
       },
-      
     })
   }
 
-  async getMember(id: number) {
-    const query = this.createQueryBuilder("member")
-      .leftJoinAndSelect("member.clothing", "clothing")
-      .leftJoinAndSelect("member.allergies", "allergy")
-      .leftJoinAndSelect("member.courses", "course");
-
-    query.where("member.id = :id", {
-      id,
-    });
-    const clothes = await query.getOne();
-
-    return clothes;
+  async getMember(id: number): Promise<Member> {
+    return await this.findOne({
+      relations: [
+        'school', 
+        'rank', 
+        'religion', 
+        'sport', 
+        'clothing', 
+        'allergies', 
+        'courses'],
+      where: {
+        id: id,
+      }
+    })
   }
 
   async getClothes(id: number) {

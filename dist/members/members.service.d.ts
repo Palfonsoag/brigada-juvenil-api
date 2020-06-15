@@ -1,0 +1,34 @@
+import { MemberRepository } from "./member.repository";
+import { Member } from "./member.entity";
+import { GetMemberFilterDto } from "./dto/get-members.dto";
+import { CreateMemberDto } from "./dto/create-members.dto";
+import { UpdateMemberDto } from "./dto/update-member.dto";
+import { UpdateSecondaryDataDto } from "./dto/update-secondary-data.dto";
+import { RanksService } from "../ranks/ranks.service";
+import { SchoolsService } from "../schools/schools.service";
+import { SportsService } from "../sports/sports.service";
+import { ReligionService } from "../religion/religion.service";
+import { ClothingService } from "../clothing/clothing.service";
+import { AllergiesService } from "../allergies/allergies.service";
+import { CoursesService } from "../courses/courses.service";
+export declare class MembersService {
+    private memberRepository;
+    private rankService;
+    private schoolService;
+    private sportService;
+    private religionService;
+    private clothingService;
+    private allergiesService;
+    private coursesService;
+    constructor(memberRepository: MemberRepository, rankService: RanksService, schoolService: SchoolsService, sportService: SportsService, religionService: ReligionService, clothingService: ClothingService, allergiesService: AllergiesService, coursesService: CoursesService);
+    getMembers(filterDto: GetMemberFilterDto): Promise<Member[]>;
+    getMember(id: number): Promise<Member>;
+    getMemberById(id: number): Promise<Member>;
+    deleteMember(id: number): Promise<void>;
+    createMember(createMemberDto: CreateMemberDto): Promise<void>;
+    updateMember(id: number, updateMemberDto: UpdateMemberDto): Promise<Member>;
+    updateSecondData(id: number, updateSecondaryDataDto: UpdateSecondaryDataDto): Promise<Member>;
+    updateClothing(id: number, clothingId: number, action: 'create' | 'remove'): Promise<Member>;
+    updateCourses(id: number, courseId: number, action: 'create' | 'remove'): Promise<Member>;
+    updateAllergy(id: number, allergyId: number, action: 'create' | 'remove'): Promise<Member>;
+}

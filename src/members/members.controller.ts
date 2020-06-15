@@ -67,7 +67,15 @@ export class MembersController {
     @Param("id", ParseIntPipe) id: number,
     @Body("clothing") clothing: number
   ): Promise<Member> {
-    return this.membersService.updateClothing(id, clothing);
+    return this.membersService.updateClothing(id, clothing, 'create');
+  }
+
+  @Put("/:id/remove-clothing")
+  removeClothing(
+    @Param("id", ParseIntPipe) id: number,
+    @Body("clothing") clothing: number
+  ): Promise<Member> {
+    return this.membersService.updateClothing(id, clothing, 'remove');
   }
 
   @Put("/:id/update-course")
@@ -75,7 +83,15 @@ export class MembersController {
     @Param("id", ParseIntPipe) id: number,
     @Body("course") course: number
   ): Promise<Member> {
-    return this.membersService.updateCourses(id, course);
+    return this.membersService.updateCourses(id, course, 'create');
+  }
+
+  @Put("/:id/remove-course")
+  removeCourses(
+    @Param("id", ParseIntPipe) id: number,
+    @Body("course") course: number
+  ): Promise<Member> {
+    return this.membersService.updateCourses(id, course, 'remove');
   }
 
   @Put("/:id/update-allergy")
@@ -83,7 +99,15 @@ export class MembersController {
     @Param("id", ParseIntPipe) id: number,
     @Body("allergy") allergy: number
   ): Promise<Member> {
-    return this.membersService.updateAllergy(id, allergy);
+    return this.membersService.updateAllergy(id, allergy, 'create');
+  }  
+  
+  @Put("/:id/remove-allergy")
+  removeAllergy(
+    @Param("id", ParseIntPipe) id: number,
+    @Body("allergy") allergy: number
+  ): Promise<Member> {
+    return this.membersService.updateAllergy(id, allergy, 'remove');
   }
 
   @Delete("/:id")

@@ -132,7 +132,7 @@ export class MembersService {
     return member;
   }
 
-  async updateClothing(id: number, clothingId: number): Promise<Member> {
+  async updateClothing(id: number, clothingId: number, action: 'create' | 'remove'): Promise<Member> {
     const member = await this.getMemberById(id);
     const clothing = await this.clothingService.getClothingById(clothingId);
 
@@ -140,7 +140,13 @@ export class MembersService {
     const clothingArray = memberCloth.clothing;
 
     if (clothingArray) {
-      member.clothing = [...clothingArray, clothing];
+      if(action === 'create') {
+        member.clothing = [...clothingArray, clothing];
+      } else {
+        member.clothing = clothingArray.filter((allergyInMember) => {
+          return allergyInMember.id !== clothing.id
+        })
+      }
     } else {
       member.clothing = [clothing];
     }
@@ -149,7 +155,7 @@ export class MembersService {
     return member;
   }
 
-  async updateCourses(id: number, courseId: number): Promise<Member> {
+  async updateCourses(id: number, courseId: number, action: 'create' | 'remove'): Promise<Member> {
     const member = await this.getMemberById(id);
     const course = await this.coursesService.getCourseById(courseId);
 
@@ -157,16 +163,22 @@ export class MembersService {
     const coursesArray = memberCourses.courses;
 
     if (coursesArray) {
-      member.courses = [...coursesArray, course];
+      if(action === 'create') {
+        member.courses = [...coursesArray, course];      
+      } else {
+        member.courses = coursesArray.filter((allergyInMember) => {
+          return allergyInMember.id !== course.id
+        })
+      }
     } else {
-      member.courses = [course];
+      action === 'create' && (member.courses = [course]);
     }
     await member.save();
 
     return member;
   }
 
-  async updateAllergy(id: number, allergyId: number): Promise<Member> {
+  async updateAllergy(id: number, allergyId: number, action: 'create' | 'remove'): Promise<Member> {
     const member = await this.getMemberById(id);
     const allergy = await this.allergiesService.getAllergyById(allergyId);
 
@@ -174,9 +186,15 @@ export class MembersService {
     const allergiesArray = memberAllergies.allergies;
 
     if (allergiesArray) {
-      member.allergies = [...allergiesArray, allergy];
+      if(action === 'create') {
+        member.allergies = [...allergiesArray, allergy];
+      } else {
+        member.allergies = allergiesArray.filter((allergyInMember) => {
+          return allergyInMember.id !== allergy.id
+        })
+      }
     } else {
-      member.allergies = [allergy];
+      action === 'create' && (member.allergies = [allergy]);
     }
     await member.save();
 
