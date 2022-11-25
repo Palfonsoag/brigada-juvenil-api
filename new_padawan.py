@@ -40,9 +40,9 @@ padawan_sheet = client.open_by_url(
 
 worksheet = padawan_sheet.worksheet_by_title('Sheet1')
 
-# input_variable = os.environ['INPUT_STORE']
+input_variable = os.environ['INPUT_STORE']
 
-input_variable = '27'
+# input_variable = '27'
 
 print("Input Variable:", input_variable)
 
