@@ -23,8 +23,9 @@ input_variable = os.environ['INPUT_STORE']
 
 print("Input Variable:", input_variable)
 
-rq = requests.get('https://api.github.com/repos/OWNER/REPO/issues/' +
-                  input_variable)
+rq = requests.get(
+    'https://api.github.com/repos/Palfonsoag/brigada-juvenil-api/issues/' +
+    input_variable)
 
 issue = rq.json()
 
