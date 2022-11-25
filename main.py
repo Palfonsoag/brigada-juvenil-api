@@ -3,7 +3,8 @@ import requests
 import pygsheets
 import os
 
-# setting global resources
+
+# setting global resources 
 
 PARAMS = {
     "Accept": "application/vnd.github+json",
@@ -23,13 +24,13 @@ input_variable = os.environ['INPUT_STORE']
 
 print("Input Variable:", input_variable)
 
-#rq = requests.get(
-#    'https://api.github.com/repos/Palfonsoag/brigada-juvenil-api/issues?state=open&pull=false'
-#)
+rq = requests.get(
+    'https://api.github.com/repos/OWNER/REPO/issues/'+input_variable
+)
 
-# issues = rq.json()
+issue = rq.json()
 
-#print(len(issues))
+print(len(issues))
 
 
 def insertOnLastRow(new_row):
@@ -38,11 +39,13 @@ def insertOnLastRow(new_row):
     worksheet.adjust_column_width(1, 18, None)
 
 
+
+
+
 def getComments(url):
     comments_rq = requests.get(url)
     coments = comments_rq.json()
     print(coments)
 
 
-#for issue in issues:
-#    getComments(issue['comments_url'])
+getComments(issue['comments_url'])
